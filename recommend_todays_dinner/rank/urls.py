@@ -3,5 +3,5 @@ from rank import views
 
 app_name = 'rank'
 urlpatterns = [
-    path('', views.index, name='index.html'),
+    path('', views.index, name='index'),
 ]

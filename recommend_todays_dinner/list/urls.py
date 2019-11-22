@@ -3,5 +3,5 @@ from list import views
 
 app_name = 'list'
 urlpatterns = [
-    path('', views.index, name='index.html'),
+    path('', views.index, name='index'),
 ]

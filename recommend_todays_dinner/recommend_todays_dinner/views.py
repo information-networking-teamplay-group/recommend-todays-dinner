@@ -1,0 +1,9 @@
+from django.views.generic.base import TemplateView
+
+class HomeView(TemplateView):
+    template_name = ""
+
+    def get_context_data(self,**kwargs):
+        context = super().get_context_data(**kwargs)
+        context['app_list']=['list','rank','recommend','review',]
+        return context
