@@ -3,5 +3,5 @@ from review import views
 
 app_name = 'review'
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('<int:restaurant_id>/', views.index, name='index'),
 ]
