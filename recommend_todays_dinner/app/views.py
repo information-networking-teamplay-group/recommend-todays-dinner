@@ -15,4 +15,4 @@ def rank(request):
     return render(request,'rank/index.html')
 
 def index(request):
-    return render(request,'./templates/index.html')
+    return render(request,'index.html')
