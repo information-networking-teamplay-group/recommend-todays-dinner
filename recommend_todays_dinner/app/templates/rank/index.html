@@ -1,0 +1,13 @@
+<!--식당 순위 화면-->
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<ul>
+    {% for res in  %}
+    <li><a href="/review/{{ res.id }}">{{ res.name }}</a></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
