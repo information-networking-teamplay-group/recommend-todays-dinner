@@ -4,9 +4,11 @@
 
 {% block content %}
 
+<h1>식당 목록</h1>
+
 <ul>
     {% for res in restaurants %}
-    <li><a href="/review/{{ res.id }}">{{ res.name }}</a></li>
+    <li><a href="/app/review/{{ res.id }}">{{ res.name }}</a></li>
     {% endfor %}
 </ul>
 

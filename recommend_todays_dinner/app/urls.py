@@ -8,5 +8,5 @@ urlpatterns = [
     path('lists/', views.lists, name = 'lists'),
     path('recommend/', views.recommend, name = 'recommend'),
     path('rank/', views.rank, name = 'rank'),
-    path('review/', views.review, name = 'review'),
+    path('review/<int:res_id>/', views.review, name = 'review'),
 ]

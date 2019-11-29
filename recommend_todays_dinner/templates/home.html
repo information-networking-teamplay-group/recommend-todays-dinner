@@ -1,12 +1,20 @@
-{% extends "base.html" %}
-
-{% block content %}
-<h2>Main</h2>
-<ul>
-    {% for appname in app_list %}
-    {% with appname|add:":"|add:"index" as urlvar %} <!-- appname:index -->
-    <li><a href="{% url urlvar %}">{{appname}}</a></li>
-    {% endwith %}
-    {% endfor %}
-</ul>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
+        <title>{% block title %}Recommend Today's Dinner{% endblock %}</title>
+    </head>
+    <body>
+        <div id="content">
+            <h1>Main</h1>
+            <ul>
+                {% for appname in app_list %}
+                {% with appname|add:":"|add:"index" as urlvar %}
+                <li><a href="{% url urlvar %}">{{appname}}</a></li>
+                {% endwith %}
+                {% endfor %}
+            </ul>
+        </div>
+    </body>
+</html>

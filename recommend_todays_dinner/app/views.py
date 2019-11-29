@@ -5,20 +5,20 @@ from . import models
 
 def lists(request):
     res = {'restaurants':models.Restaurants.objects.all()}
-    return render(request,'list/index.html',res)
+    return render(request,'lists/index.html',res)
     
 def review(request, res_id):
-    restaurants = get_object_or_404(models.Review,pk=res_id)
+    restaurants = get_object_or_404(models.Restaurants,pk=res_id)
     try:
-        reviews = restaurants.review_set.get(pk=request.POST['review'])
-        return render(requst,'review/index.html',
-        {'restaurants':restaurants,'reviews':reviews})
-    except (KeyError,Review.DoesNotExist):
+        review = restaurants.review_set.all()
         return render(request,'review/index.html',
-        {'restaurants':restaurants,'error_message':"You didn't select a choice."})  
+        {'restaurants':restaurants,'review':review})
+    except (KeyError,models.Review.DoesNotExist):
+        return render(request,'review/index.html',
+        {'restaurants':restaurants,'error_message':"리뷰가 존재하지 않습니다."})  
     else:
-        pass     
-    
+        pass
+
 def recommend(request):
     return render(request,'recommend/index.html')
     
@@ -28,13 +28,13 @@ def rank(request):
     index = -1
 
     for res in restaurants:
-        reviews = get_object_or_404(models.Review,pk=res.id)
+        review = res.review_set.all()
         scores.append(0)
         index += 1
-        for review in reviews:
-            scores[index] += reviews.score
+        for rev in review:
+            scores[index] += rev.score
 
-        scores[index] /= reviews.size
+        scores[index] /= len(review)
     
     return render(request,'rank/index.html',{'restaurants':restaurants,'scores':scores})
 

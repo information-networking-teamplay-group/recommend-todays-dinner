@@ -1,0 +1,32 @@
+<!--리뷰 화면-->
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>{{ restaurants.name }} 리뷰</h1>
+
+{% if error_message %}<p>{{ error_message }}</p>
+{% else %}
+
+<ul>
+    {% for rev in review %}
+    <li>
+        <h6>작성자 : {{ rev.writer }}</h6>
+        점수 : {{ rev.score }}<br>
+        {{ rev.contents }}
+    </li>
+    {% endfor %}
+</ul>
+
+{% endif %}
+
+<form action="{% url 'app:review' review.id %}" method="POST">
+{% csrf_token %}
+    이름 : <input id="review_name" type="text" name="name" maxlength="20"><br>
+    점수 : <input id="review_score" type="number" name="score" min="1" max="10"><br>
+    <input id="review_contents" type="text" name="contents" placeholder="리뷰 내용을 입력해주세요."><br>
+    <input type="submit" value="등록">
+</form>
+
+{% endblock %}
