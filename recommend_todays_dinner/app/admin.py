@@ -3,4 +3,5 @@ from . import models
 
 # Register your models here.
 
-admin.site.register(models.Restaurant)
+admin.site.register(models.Restaurants)
+admin.site.register(models.Review)
