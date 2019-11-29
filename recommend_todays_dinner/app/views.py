@@ -10,7 +10,9 @@ def lists(request):
 def review(request, res_id):
     restaurants = get_object_or_404(models.Review,pk=res_id)
     try:
-        select_restaurats = restaurants.review_set.get(pk=request.POST['review'])
+        reviews = restaurants.review_set.get(pk=request.POST['review'])
+        return render(requst,'review/index.html',
+        {'restaurants':restaurants,'reviews':reviews})
     except (KeyError,Review.DoesNotExist):
         return render(request,'review/index.html',
         {'restaurants':restaurants,'error_message':"You didn't select a choice."})  
@@ -31,7 +33,7 @@ def rank(request):
         index += 1
         for review in reviews:
             scores[index] += reviews.score
-            
+
         scores[index] /= reviews.size
     
     return render(request,'rank/index.html',{'restaurants':restaurants,'scores':scores})
