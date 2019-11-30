@@ -5,19 +5,11 @@ from . import models
 
 def lists(request):
     res = {'restaurants':models.Restaurants.objects.all()}
-    return render(request,'lists/index.html',res)
+    return render(request,'lists/index.html', res)
     
 def review(request, res_id):
     restaurants = get_object_or_404(models.Restaurants,pk=res_id)
-    try:
-        review = restaurants.review_set.all()
-        return render(request,'review/index.html',
-        {'restaurants':restaurants,'review':review})
-    except (KeyError,models.Review.DoesNotExist):
-        return render(request,'review/index.html',
-        {'restaurants':restaurants,'error_message':"리뷰가 존재하지 않습니다."})  
-    else:
-        pass
+    return render(request,'review/index.html', {'restaurants':restaurants})
 
 def recommend(request):
     return render(request,'recommend/index.html')
@@ -34,7 +26,8 @@ def rank(request):
         for rev in review:
             scores[index] += rev.score
 
-        scores[index] /= len(review)
+        if(len(review) != 0):
+            scores[index] /= len(review)
     
     return render(request,'rank/index.html',{'restaurants':restaurants,'scores':scores})
 
