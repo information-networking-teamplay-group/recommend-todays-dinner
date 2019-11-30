@@ -4,6 +4,37 @@
         {% load static %}
         <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
         <title>{% block title %}Recommend Today's Dinner{% endblock %}</title>
+        <style>
+             h1{
+                color: #000000;
+                background-color: #FCA205;
+                padding: 20px;
+                width: 1400px;
+                height: 30px;
+                border: 1px solid #000;
+            }
+            #review_contents{
+                text-align: left;
+                width:500px;
+                height:100px;
+                overflow: auto;
+            }
+            .scroll{
+                width:1400px;
+                height:500px;
+                overflow-y:scroll;
+                padding: 20px;
+                
+            }
+            .review_scene{
+                background-color: lightblue;
+                border: 1px solid #000;
+            }  
+            .review{
+                padding: 20px;
+                
+            }
+        </style>
     </head>
     <body>
         <div id="map">
