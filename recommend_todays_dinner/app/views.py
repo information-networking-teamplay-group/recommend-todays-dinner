@@ -16,20 +16,30 @@ def recommend(request):
     
 def rank(request):
     restaurants = models.Restaurants.objects.all()
-    scores = []
     index = -1
+
+    restaurants_value = restaurants.values()
+    scores = []
 
     for res in restaurants:
         review = res.review_set.all()
         scores.append(0)
         index += 1
+
         for rev in review:
             scores[index] += rev.score
 
         if(len(review) != 0):
             scores[index] /= len(review)
-    
-    return render(request,'rank/index.html',{'restaurants':restaurants,'scores':scores})
+
+    index = 0
+    for res in restaurants_value:
+        res['score'] = scores[index]
+        index += 1
+
+    restaurants_value = sorted(restaurants_value, key=lambda res: res['score'], reverse=True)
+
+    return render(request,'rank/index.html',{'restaurants':restaurants_value})
 
 def index(request):
     return render(request,'index.html')

@@ -8,6 +8,7 @@ class Restaurants(models.Model):
     name = models.CharField(max_length = 20)    #식당 이름
     lore = models.CharField(max_length = 500)   #식당 설명
     tags = models.CharField(max_length = 50)    #태그
+    score = models.FloatField(default = 0)      #평균점수
 
     def __str__(self):
         return self.name

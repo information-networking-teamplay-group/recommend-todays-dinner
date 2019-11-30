@@ -25,7 +25,10 @@ SECRET_KEY = 'rl11esbr(ve=i6e_hfx8#ybzr8uqur_=t!e=33ya0!nsdi7$y-'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '0.0.0.0',
+    '58.228.190.203',
+]
 
 
 # Application definition
