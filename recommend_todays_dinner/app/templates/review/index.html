@@ -12,7 +12,7 @@
 <ul>
     {% for rev in review %}
     <li>
-        <h6>작성자 : {{ rev.writer }}</h6>
+        <h4>작성자 : {{ rev.writer }}</h4>
         점수 : {{ rev.score }}<br>
         {{ rev.contents }}
     </li>
@@ -21,11 +21,11 @@
 
 {% endif %}
 
-<form action="{% url 'app:review' review.id %}" method="POST">
+<form action="{% url 'app:review' restaurants.id %}" method="POST">
 {% csrf_token %}
     이름 : <input id="review_name" type="text" name="name" maxlength="20"><br>
     점수 : <input id="review_score" type="number" name="score" min="1" max="10"><br>
-    <input id="review_contents" type="text" name="contents" placeholder="리뷰 내용을 입력해주세요."><br>
+    <input id="review_contents" type="text" name="contents" placeholder="리뷰 내용을 입력해주세요." maxlength="200"><br>
     <input type="submit" value="등록">
 </form>
 
