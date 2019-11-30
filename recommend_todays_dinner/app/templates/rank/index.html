@@ -6,11 +6,11 @@
 
 <h1>식당 순위</h1>
 
-<ul>
+<ol>
     {% for res in restaurants %}
     <li><a href="/app/review/{{ res.id }}">{{ res.name }}</a>, {{ res.score }}점</li>
     {% endfor %}
-</ul>
+</ol>
 
 <br><p><a href="{% url 'app:index' %}">메인화면으로</a></p>
 

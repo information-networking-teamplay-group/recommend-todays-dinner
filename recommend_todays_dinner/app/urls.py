@@ -9,4 +9,5 @@ urlpatterns = [
     path('recommend/', views.recommend, name = 'recommend'),
     path('rank/', views.rank, name = 'rank'),
     path('review/<int:res_id>/', views.review, name = 'review'),
+    path('review/<int:res_id>/submit/', views.review_submit, name = 'review_submit'),
 ]

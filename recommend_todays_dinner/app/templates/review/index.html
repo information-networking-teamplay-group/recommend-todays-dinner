@@ -16,15 +16,13 @@
     {% endfor %}
 </ul>
 
-<form action="{% url 'app:review' restaurants.id %}" method="POST">
+<form action="{% url 'app:review_submit' restaurants.id %}" method="POST">
 {% csrf_token %}
-    이름 : <input id="review_name" type="text" name="name" maxlength="20"><br>
+    이름 : <input id="review_name" type="text" name="name" maxlength="20" required><br>
     점수 : <input id="review_score" type="number" name="score" value="10" min="1" max="10"><br>
-    <input id="review_contents" type="text" name="contents" placeholder="리뷰 내용을 입력해주세요." maxlength="200"><br>
+    <textarea id="review_contents" name="contents" cols="40" rows="8" placeholder="리뷰 내용을 작성해주세요." maxlength="200"></textarea><br>
     <input type="submit" value="등록">
 </form>
-<br><br>
-<p><a href="{% url 'app:lists' %}">식당 목록 보기</a></p>
 <br><p><a href="{% url 'app:index' %}">메인화면으로</a></p>
 
 {% endblock %}
