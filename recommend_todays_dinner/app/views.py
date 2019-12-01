@@ -2,6 +2,7 @@ from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from . import models
+import math
 
 # Create your views here.
 
@@ -75,7 +76,7 @@ def rank(request):
 
     index = 0
     for res in restaurants_value:
-        res['score'] = scores[index]
+        res['score'] = math.floor(scores[index] * 100) / 100
         index += 1
 
     restaurants_value = sorted(restaurants_value, key=lambda res: res['score'], reverse=True)
