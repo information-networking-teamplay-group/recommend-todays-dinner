@@ -23,7 +23,37 @@ def review_submit(request, res_id):
     return HttpResponseRedirect(reverse('app:review', args=(restaurants.id,)))
 
 def recommend(request):
-    return render(request,'recommend/index.html')
+    res = {'restaurants':models.Restaurants.objects.all(), 'last_tag':''}
+
+    return render(request,'recommend/index.html', res)
+
+def recommend_filter(request):
+    restaurants = models.Restaurants.objects.all()
+    last_tag = request.POST['last_tag']
+    new_tag = request.POST['new_tag']
+    tags = last_tag
+    if tags == '':
+        tags = new_tag
+    else:
+        tags = tags + "|" + new_tag
+
+    tag_list = tags.split('|')
+
+    restaurants_value = restaurants.values()
+    restaurants_filter = []
+
+    for res in restaurants_value:
+        res_tag = res['tags'].split('|')
+        asdf = True
+
+        for tag in tag_list:
+            if tag not in res_tag:
+                asdf = False
+
+        if asdf == True:
+            restaurants_filter.append(res)
+
+    return render(request,'recommend/index.html', {'restaurants':restaurants_filter, 'last_tags':tags})
     
 def rank(request):
     restaurants = models.Restaurants.objects.all()

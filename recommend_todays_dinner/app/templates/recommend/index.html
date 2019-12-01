@@ -6,7 +6,18 @@
 
 <h1>식당 추천</h1>
 
+<ul>
+    {% for res in restaurants %}
+    <li><a href="/app/review/{{ res.id }}">{{ res.name }}</a></li>
+    {% endfor %}
+</ul>
 
+<form action="{% url 'app:recommend_filter' %}" method="POST">
+    {% csrf_token %}
+    이전 태그들 : <input id="last_tag" type="text" name="last_tag" maxlength="70" value="{{ last_tags }}" readonly required><br>
+    새로운 태그 : <input id="new_tag" type="text" name="new_tag" maxlength="10" value="" required><br>
+    <input type="submit" value="필터링">
+</form>
 
 <br><p><a href="{% url 'app:index' %}">메인화면으로</a></p>
 
