@@ -4,6 +4,25 @@
 
 {% block content %}
 
+<script>
+    positions = [];
+    {% for res in restaurants %}
+        {% if forloop.counter <= 5 %}
+
+            var tempName = "{{res.name}}";
+            var tempLatitude = "{{res.latitude}}";
+            var tempLongitude = "{{res.longitude}}";
+
+            positions.push({
+                content: '<div>'+tempName+'</div>',
+                latlng: new kakao.maps.LatLng(tempLatitude, tempLongitude)
+            });
+
+        {% endif %}
+    {% endfor %}
+    notifyMarkerChange();
+</script>
+
 <h1>식당 순위</h1>
 
 <ol>

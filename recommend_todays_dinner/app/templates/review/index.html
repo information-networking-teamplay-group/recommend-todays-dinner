@@ -4,9 +4,20 @@
 
 {% block content %}
 
-<h1>{{ restaurants.name }}<div style="float:right"><span style="font-size:x-small;">{% for tag in tags %}#{{tag}}{% endfor %}</span></div></h1>
+<script>
+    var tempName = "{{restaurants.name}}";
+    var tempLatitude = "{{restaurants.latitude}}";
+    var tempLongitude = "{{restaurants.longitude}}";
 
+    positions = [{
+        content: '<div>'+tempName+'</div>',
+        latlng: new kakao.maps.LatLng(tempLatitude, tempLongitude)
+    }];
 
+    notifyMarkerChange();
+</script>
+
+<h1>{{ restaurants.name }}<div style="float:right"><span style="font-size:small;">{% for tag in tags %}#{{tag}} {% endfor %}</span></div></h1>
 
 <div class="review_scene">
     <p style="padding:20px;">{{ restaurants.lore }}</p>

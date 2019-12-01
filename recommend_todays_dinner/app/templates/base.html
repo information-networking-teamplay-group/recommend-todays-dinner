@@ -44,14 +44,48 @@
     <body>
         <div id="map" style="width: 40%; height: 700px; float: left;"></div>
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cf1ab38f497b8c5ccb979e1574722611"></script>
+
+        <!--지도 스크립트-->
         <script>
             var container = document.getElementById('map');
 		    var options = {
 			    center: new kakao.maps.LatLng(37.542719, 126.967207),
 			    level: 4
 		    };
+
 		    var map = new kakao.maps.Map(container, options);
+
+            var positions = [];
+
+            function notifyMarkerChange(){ //마커 정보 업데이트
+                for(var i = 0; i < positions.length; i++){
+                    var marker = new kakao.maps.Marker({
+                        map: map,
+                        position: positions[i].latlng
+                    });
+
+                    var infowindow = new kakao.maps.InfoWindow({
+                        content: positions[i].content
+                    });
+
+                    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+                    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+                }
+            }
+
+            function makeOverListener(map, marker, infowindow){
+                return function(){
+                    infowindow.open(map, marker);
+                }
+            }
+
+            function makeOutListener(infowindow){
+                return function(){
+                    infowindow.close();
+                }
+            }
         </script>
+
         <div id="content" style="width: 40%; float: left;">
             {% block content %}
             {% endblock %}
