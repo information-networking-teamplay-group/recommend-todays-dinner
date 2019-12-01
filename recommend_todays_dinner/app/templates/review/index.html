@@ -6,6 +6,8 @@
 
 <h1>{{ restaurants.name }} 리뷰</h1>
 <div class="review_scene">
+    <p style="padding:20px;">{{ restaurants.lore }}</p>
+    <hr style="background-color:black; width: 1380px;">
     <div class="scroll"> 
     <ul>
         {% for rev in restaurants.review_set.all %}
