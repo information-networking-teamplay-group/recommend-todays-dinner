@@ -14,7 +14,7 @@ def review(request, res_id):
     restaurants = get_object_or_404(models.Restaurants,pk=res_id)
     tags = restaurants.tags.split('|')
 
-    return render(request,'review/index.html', {'restaurants':restaurants, 'tags',tags})
+    return render(request,'review/index.html', {'restaurants':restaurants, 'tags':tags})
 
 def review_submit(request, res_id):
     restaurants = get_object_or_404(models.Restaurants, pk=res_id)
