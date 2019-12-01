@@ -20,6 +20,12 @@ def review_submit(request, res_id):
     restaurants = get_object_or_404(models.Restaurants, pk=res_id)
     new_writer = request.POST['name']
     new_score = request.POST['score']
+
+    if int(new_score) > 10:
+        new_score = '10'
+    if int(new_score) < 1:
+        new_score = '1'
+
     new_contents = request.POST['contents']
     new_review = models.Review(writer=new_writer, score=new_score, contents=new_contents, restaurant=restaurants)
     new_review.save()
