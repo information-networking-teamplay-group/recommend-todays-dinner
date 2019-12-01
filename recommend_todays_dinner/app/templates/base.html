@@ -5,26 +5,32 @@
         <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
         <title>{% block title %}Recommend Today's Dinner{% endblock %}</title>
         <style>
-             h1{
+            #map{
+                margin: 2%;
+                border: 1px solid #000000;
+            }
+            hr{
+                background: black;
+                width: 100%;
+            }
+            h1{
                 color: #000000;
                 background-color: #FCA205;
                 padding: 20px;
-                width: 1400px;
+                width: 95%;
                 height: 30px;
                 border: 1px solid #000;
             }
             #review_contents{
                 text-align: left;
-                width:500px;
+                width:80%;
                 height:100px;
                 overflow: auto;
             }
             .scroll{
-                width:1400px;
-                height:500px;
+                width:100%;
+                height:400px;
                 overflow-y:scroll;
-                padding: 20px;
-                
             }
             .review_scene{
                 background-color: lightblue;
@@ -32,15 +38,21 @@
             }  
             .review{
                 padding: 20px;
-                
             }
         </style>
     </head>
     <body>
-        <div id="map">
-            <!--지도 넣기-->
-        </div>
-        <div id="content">
+        <div id="map" style="width: 40%; height: 700px; float: left;"></div>
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cf1ab38f497b8c5ccb979e1574722611"></script>
+        <script>
+            var container = document.getElementById('map');
+		    var options = {
+			    center: new kakao.maps.LatLng(37.542719, 126.967207),
+			    level: 4
+		    };
+		    var map = new kakao.maps.Map(container, options);
+        </script>
+        <div id="content" style="width: 40%; float: left;">
             {% block content %}
             {% endblock %}
         </div>
